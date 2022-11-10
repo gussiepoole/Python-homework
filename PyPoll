@@ -1,1 +1,27 @@
+import os
+import csv
 
+election_data_csv_path = os.path.join("Documents","PyPoll","Resources","election_data.csv")
+
+with open(election_data_csv_path, 'r') as csv.file:
+    csv_reader= csv.reader(csv.file)
+    csv_header=next(csv_reader, None)
+
+    print(csv_header)
+
+
+    new_voter=[]
+    new_county=[]
+    new_candidate=[]
+    column={}
+
+for h in csv_header:
+        column[h]=[]
+
+for row in csv_reader:
+    for h,e in zip(csv_header,row):
+        column[h].append(e)
+        
+        new_voter = column['Ballot ID']
+        new_county = column['County']
+        new_candidate =column['Candidate']
