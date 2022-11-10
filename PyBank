@@ -1,1 +1,46 @@
+import os
+import csv
 
+budget_data_csv_path = os.path.join("Documents","PyBank","Resources", "budget_data.csv")
+
+
+#open and read csv
+
+with open(budget_data_csv_path, 'r') as csv_file:
+    csv_reader= csv.reader(csv_file)
+    csv_header=next(csv_reader, None)
+
+    print(csv_header)
+
+
+    new_list=[]
+    new_profit=[]
+    column={}
+    change_list = []
+
+    for h in csv_header:
+        column[h]=[]
+
+
+
+    for row in csv_reader:
+        for h,e in zip(csv_header,row):
+            column[h].append(e)
+
+    new_list = column['Date']
+    new_profit = column['Profit/Losses']
+    print(new_list)
+
+    print("total months: " + str(len(new_list)))
+
+    int_profit = list(map(int, new_profit))
+    print("total $" + str(sum(int_profit)))
+
+    profit_total = sum(list(int_profit))
+    profit_num = (list(int_profit))
+
+    for i in range(len(profit_num)):
+         change= (profit_num[i] - profit_num [i-1])
+         change_list.append(change)
+         change= sum(change_list)/len(profit_num)
+         average_change = sum(change_list)/len(profit_num)
